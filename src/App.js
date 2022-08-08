@@ -1,13 +1,39 @@
+import { useState } from "react";
+import { Container, Navbar, Row, Col } from "react-bootstrap";
+import AddProduct from "./components/AddProduct";
+import ProductsList from "./components/ProductsList";
 import "./App.css";
-import AddProducts from "./componets/AddProducts";
-import CategoryDetails from "./componets/CategoryDetail";
 
 function App() {
+  const [productId, setProductId] = useState("");
+
+  const getProductIdHandler = (id) => {
+    console.log("The ID of document to be edited: ", id);
+    setProductId(id);
+  };
   return (
-    <div className="App">
-      <AddProducts />
-      {/* <CategoryDetails /> */}
-    </div>
+    <>
+      <Navbar bg="dark" variant="dark" className="header">
+        <Container>
+          <Navbar.Brand href="#home">Library - Firebase CRUD</Navbar.Brand>
+        </Container>
+      </Navbar>
+
+      <Container style={{ width: "400px" }}>
+        <Row>
+          <Col>
+            <AddProduct id={productId} setProductId={setProductId} />
+          </Col>
+        </Row>
+      </Container>
+      <Container>
+        <Row>
+          <Col>
+            <ProductsList getProductId={getProductIdHandler} />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 
